@@ -11,7 +11,7 @@ Brent, Richard P. "Note on Computing Ratings from Eigenvectors." _arXiv preprint
 
 The problem is as follow:
 
-There are $n$ players playing among each other in a zero-sum game for several times. Assume a WIN score 1 mark, a DRAW score 0.5 marks and a LOSE scores 0 marks. We obtained a score matrix $S = (s_{ij})$.
+There are $n$ players playing among each other in a zero-sum game for several times. Assume a WIN score 1 mark, a DRAW score 0.5 marks and a LOSE scores 0 marks. We obtain a score matrix $S = (s_{ij})$.
 
 We want to compute a rating $r_i$ for each player $i$ from the score matrix $S$. The ratings should capture the relative strength of the players.
 
