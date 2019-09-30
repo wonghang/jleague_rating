@@ -2,9 +2,26 @@
 Japan J League Ratings computed from eigenvectors
 
 This code compute ratings from raw data of Japan J League.
+
+# The Algorithm
+
 The algorithm is based on 
 
-Brent, Richard P. "Note on Computing Ratings from Eigenvectors." __arXiv preprint__ arXiv:[1005.0762](https://arxiv.org/abs/1005.0762) (2010).
+> Brent, Richard P. "Note on Computing Ratings from Eigenvectors." * *arXiv preprint* * arXiv:[1005.0762](https://arxiv.org/abs/1005.0762) (2010).
+
+Assume we have <img alt="$n$" src="svgs/55a049b8f161ae7cfeb0197d75aff967.png" align="middle" width="9.867000000000003pt" height="14.155350000000013pt"/> players playing among each others in a zero-sum game. Assume a WIN score 1 mark, a DRAW score 0.5 mark and a LOSE scores 0. We obtained a score matrix <img alt="$s_{ij}$" src="svgs/8184020a45b4be8100982ccf94eb83a1.png" align="middle" width="18.461025pt" height="14.155350000000013pt"/>.
+
+We want to compute a rating <img alt="$r_i$" src="svgs/3cf87ea38a615ed99e0232f8ed9431fe.png" align="middle" width="12.067275000000004pt" height="14.155350000000013pt"/> for each player <img alt="$i$" src="svgs/77a3b857d53fb44e33b53e4c8b68351a.png" align="middle" width="5.663295000000005pt" height="21.683310000000006pt"/> from the score matrix <img alt="$s_{ij}$" src="svgs/8184020a45b4be8100982ccf94eb83a1.png" align="middle" width="18.461025pt" height="14.155350000000013pt"/>.
+
+To start with, we assume the rating <img alt="$r_i$" src="svgs/3cf87ea38a615ed99e0232f8ed9431fe.png" align="middle" width="12.067275000000004pt" height="14.155350000000013pt"/> and <img alt="$r_j$" src="svgs/212f899c5235a861a1f6146dc8d1582f.png" align="middle" width="13.520925000000005pt" height="14.155350000000013pt"/> would capture the expected score of a player <img alt="$i$" src="svgs/77a3b857d53fb44e33b53e4c8b68351a.png" align="middle" width="5.663295000000005pt" height="21.683310000000006pt"/> in a game against player <img alt="$j$" src="svgs/36b5afebdba34564d884d347484ac0c7.png" align="middle" width="7.710483000000004pt" height="21.683310000000006pt"/> as <img alt="$f(r_i - r_j)$" src="svgs/3b03c5390eb15e78ef471bd6b3254bcc.png" align="middle" width="69.92601pt" height="24.65759999999998pt"/> for some function <img alt="$f: \mathbb{R} \to [0,1]$" src="svgs/eee6982d58163a355d800d004a5530fc.png" align="middle" width="93.8355pt" height="24.65759999999998pt"/>.
+
+Using some reasonable assumptions, we can model <img alt="$f$" src="svgs/190083ef7a1625fbc75f243cffb9c96d.png" align="middle" width="9.817500000000004pt" height="22.831379999999992pt"/> as a logistic function <img alt="$f(z) = \frac{1}{1+e^{-cz}}$" src="svgs/4db44e8713c4b0fd70cfe00e0962f393.png" align="middle" width="98.770155pt" height="27.775769999999994pt"/> for some number <img alt="$c$" src="svgs/3e18a4a28fdee1744e5e3f79d13b9ff6.png" align="middle" width="7.113876000000004pt" height="14.155350000000013pt"/>
+
+After some simplification, the solution of the problem reduces into an eigenvalue problem. The code compute the solution by power method.
+
+The code implements an efficient sparse and online version of the algorithm (i.e. new data can be feeded into the algorithm to update previously computed ratings). The code uses a python `dict` object to store the sparse score matrix.
+
+The <img alt="$sigma$" src="svgs/a6eac6e5d427befc8252f33e6f014aa2.png" align="middle" width="44.921415pt" height="21.683310000000006pt"/> used in the code is set to `0.3`. Check session 3 of the paper for the details.
 
 # Data
 
@@ -40,6 +57,8 @@ The meaning of the field as follows
 | JSC | Japan Super Cup (富士ゼロックス スーパーカップ) |
 | 1JSTL | Japan Satellite League |
 
-Any *-1* in the data means a missing data
+Any **-1** in the data means a missing data.
 
-<p align="center"><img alt="$$&#10;\int_0^{\infty} \frac{\sin(x)}{x} \mbox{d} x = \frac{\sqrt{\pi}}{2}&#10;$$" src="svgs/461b521e0c9a8623a44d18d090fa598b.png" align="middle" width="145.48973999999998pt" height="38.595645pt"/></p>
+# API
+
+# Example
