@@ -7,7 +7,7 @@ This code computes the ratings of Japan League football team from their raw data
 
 The code implements
 
-> Brent, Richard P. "Note on Computing Ratings from Eigenvectors." * *arXiv preprint* * arXiv:[1005.0762](https://arxiv.org/abs/1005.0762) (2010).
+Brent, Richard P. "Note on Computing Ratings from Eigenvectors." * *arXiv preprint* * arXiv:[1005.0762](https://arxiv.org/abs/1005.0762) (2010).
 
 The problem is as follow:
 
@@ -28,7 +28,9 @@ for some number $c$.
 Under this assumption, the solution to the problem reduces into an eigenvalue problem. The code computes the solution by power method.
 
 The code implements an efficient sparse and online version of the algorithm (i.e., new data can be fed into the algorithm to update previously computed ratings).
+
 The code adds a dummy player who makes a DRAW game with all the other players to resolve the potential degenerate issue.  (See the paper for details)
+
 The dummy player has the name "" (empty string) and must have index 0.
 
 # Dependencies
@@ -39,7 +41,7 @@ The code requires [numpy](https://numpy.org/), [pandas](https://pandas.pydata.or
 
 
 ```shell
-\$ python3 jleague_rating.py
+> python3 jleague_rating.py
 丸安岡崎 => -0.217086
 日聯U22 => -0.200225
 岡山綠雉二隊 => -0.196062
@@ -205,12 +207,12 @@ FC本田 => 0.132533
 山口雷法 => 0.194005
 ```
 
-```
 The bigger the rating is, the stronger the team is.
 As the code implements an online algorithm, one can plot the ratings of teams against the dates:
 (The first 100 data points are not plotted)
 
-\$ python3 jleague_rating.py 鹿島鹿角 浦和紅鑽 清水心跳
+```shell
+> python3 jleague_rating.py 鹿島鹿角 浦和紅鑽 清水心跳
 ```
 
 ![Figure_1.png](Figure_1.png?raw=true "Figure 1")
