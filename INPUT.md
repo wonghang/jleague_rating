@@ -7,7 +7,7 @@ This code computes the ratings of Japan League football team from their raw data
 
 The code implements
 
-Brent, Richard P. "Note on Computing Ratings from Eigenvectors." * *arXiv preprint* * arXiv:[1005.0762](https://arxiv.org/abs/1005.0762) (2010).
+Brent, Richard P. "Note on Computing Ratings from Eigenvectors." _arXiv preprint_ arXiv:[1005.0762](https://arxiv.org/abs/1005.0762) (2010).
 
 The problem is as follow:
 
