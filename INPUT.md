@@ -1,7 +1,7 @@
 # jleague_rating
 Japan J League Ratings computed from eigenvectors
 
-This code compute ratings from raw data of Japan J League.
+This code computes ratings from raw data of Japan J League.
 
 # The Algorithm
 
@@ -9,19 +9,19 @@ The algorithm is based on
 
 > Brent, Richard P. "Note on Computing Ratings from Eigenvectors." * *arXiv preprint* * arXiv:[1005.0762](https://arxiv.org/abs/1005.0762) (2010).
 
-Assume we have $n$ players playing among each others in a zero-sum game. Assume a WIN score 1 mark, a DRAW score 0.5 mark and a LOSE scores 0. We obtained a score matrix $s_{ij}$.
+The problem is as follow:
 
-We want to compute a rating $r_i$ for each player $i$ from the score matrix $s_{ij}$.
+There are $n$ players playing among each other in a zero-sum game for several times. Assume a WIN score 1 mark, a DRAW score 0.5 marks and a LOSE scores 0 marks. We obtained a score matrix $s_{ij}$.
+
+We want to compute a rating $r_i$ for each player $i$ from the score matrix $s_{ij}$ that capture the relative strength of the player $i$
 
 To start with, we assume the rating $r_i$ and $r_j$ would capture the expected score of a player $i$ in a game against player $j$ as $f(r_i - r_j)$ for some function $f: \mathbb{R} \to [0,1]$.
 
-Using some reasonable assumptions, we can model $f$ as a logistic function $f(z) = \frac{1}{1+e^{-cz}}$ for some number $c$
+Under some reasonable assumptions, we can model $f$ as a logistic function $f(z) = \frac{1}{1+e^{-cz}}$ for some number $c$
 
-After some simplification, the solution of the problem reduces into an eigenvalue problem. The code compute the solution by power method.
+After some simplification, the solution of the problem reduces into an eigenvalue problem. The code computes the solution by power method.
 
-The code implements an efficient sparse and online version of the algorithm (i.e. new data can be feeded into the algorithm to update previously computed ratings). The code uses a python `dict` object to store the sparse score matrix.
-
-The $sigma$ used in the code is set to `0.3`. Check session 3 of the paper for the details.
+The code implements an efficient sparse and online version of the algorithm (i.e., new data can be fed into the algorithm to update previously computed ratings). The code uses a python `dict` object to store the sparse score matrix.
 
 # Data
 
@@ -32,7 +32,7 @@ The meaning of the field as follows
 | field | meaning |
 | --- | --- |
 | date | Date of the football match |
-| league | League of the match |
+| league | League of the match (see below) |
 | home | Name of home team |
 | away | Name of away team |
 | neutral | 1 indicates the venue is neutral. 0 if not |
@@ -57,7 +57,7 @@ The meaning of the field as follows
 | JSC | Japan Super Cup (富士ゼロックス スーパーカップ) |
 | 1JSTL | Japan Satellite League |
 
-Any **-1** in the data means a missing data.
+Any **-1** in the data means missing data.
 
 # API
 
