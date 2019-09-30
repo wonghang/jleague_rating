@@ -26,11 +26,8 @@ class online_brent_rating:
         else:
             return "<online_brent_rating at 0x%x, #game=%d, #players=%d, #updating=%d>" % (id(self),self.tgc,self.n,self.ntgc)
 
-    def current(self,log=True):
-        if log:
-            return np.log(self.orating) - np.log(self.orating[0])
-        else:
-            return self.orating / self.orating[0]
+    def current(self):
+        return np.log(self.orating) - np.log(self.orating[0])
 
     def names(self):
         return self.name_map_inv
