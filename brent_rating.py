@@ -138,6 +138,11 @@ class online_brent_rating:
         self.nS = None
         self.ngc = None
 
+    def predict(self,n1,n2):
+        n1 = self.get(n1)
+        n2 = self.get(n2)
+        return 1./(1.+np.exp(-(n1-n2)))
+
 if __name__ == "__main__":
     br = online_brent_rating()
 
@@ -170,3 +175,8 @@ if __name__ == "__main__":
 
     for (name,r) in br:
         print("%s => %g" % (name,r))
+    print(br.predict("A","A"))
+    print(br.predict("A","B"))
+    print(br.predict("A","C"))
+    print(br.predict("A","D"))
+    print(br.predict("A","E"))

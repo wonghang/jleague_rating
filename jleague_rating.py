@@ -20,7 +20,7 @@ def convert_date(d):
     dd = int(d[6:8])
     return dates.date2num(datetime.datetime(yy,mm,dd))
 
-def loop_through():
+def run():
     header = None
 
     br = online_brent_rating()
@@ -78,29 +78,39 @@ def loop_through():
         yield (last_date,br)
     
 def main():
-    if len(sys.argv) == 1:
-        print("%s (team name 1) (team name 2) ..." % sys.argv[0])
-        sys.exit(1)
-    else:
+    if len(sys.argv) > 1:
         teams = sys.argv[1:]
-        
-    ignore_first = 100
-    x = []
-    y = []
-    for (today,br) in loop_through():
-        if ignore_first <= 0:
-            x.append(convert_date(today))
-            y.append([br[_] for _ in teams])
-        else:
-            ignore_first -= 1
-        
-    plt.figure()
-    plt.plot_date(x,y,'-')
+    else:
+        teams = []
 
-    font_prop = FontProperties(family='Droid Sans Fallback')
-    plt.legend(teams,prop=font_prop)
-    plt.grid(True)
-    plt.show()
+    if len(teams) > 0:
+        ignore_first = 100
+        x = []
+        y = []
+        for (today,br) in run():
+            if ignore_first <= 0:
+                x.append(convert_date(today))
+                y.append([br[_] for _ in teams])
+            else:
+                ignore_first -= 1
+            
+        plt.figure()
+        plt.plot_date(x,y,'-')
+
+        # for CJK character
+        font_prop = FontProperties(family='Droid Sans Fallback')
+        
+        plt.legend(teams,prop=font_prop)
+        plt.xlabel("Date")
+        plt.ylabel("rating")
+        plt.grid(True)
+        plt.show()
+    else:
+        for (today,br) in run():
+            pass
+        
+    for (name,r) in sorted(br,key=operator.itemgetter(1)):
+        print("%s => %g" % (name,r))
 
 if __name__ == "__main__":
     main()
