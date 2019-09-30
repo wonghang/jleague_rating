@@ -39,7 +39,7 @@ The code requires [numpy](https://numpy.org/), [pandas](https://pandas.pydata.or
 
 
 ```shell
-$ python3 jleague_rating.py
+\$ python3 jleague_rating.py
 丸安岡崎 => -0.217086
 日聯U22 => -0.200225
 岡山綠雉二隊 => -0.196062
@@ -210,7 +210,7 @@ The bigger the rating is, the stronger the team is.
 As the code implements an online algorithm, one can plot the ratings of teams against the dates:
 (The first 100 data points are not plotted)
 
-$ python3 jleague_rating.py 鹿島鹿角 浦和紅鑽 清水心跳
+\$ python3 jleague_rating.py 鹿島鹿角 浦和紅鑽 清水心跳
 ```
 
 ![Figure_1.png](Figure_1.png?raw=true "Figure 1")
