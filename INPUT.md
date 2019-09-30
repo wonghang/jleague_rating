@@ -1,5 +1,5 @@
 # jleague_rating
-Japan J League Ratings computed from eigenvectors
+Japan J League Ratings computed from eigenvectors.
 
 This code computes the ratings of Japan League football team from their raw data.
 
@@ -252,3 +252,74 @@ The meaning of the field as follows
 | 1JSTL | Japan Satellite League |
 
 Any -1 in the data means missing data.
+
+# API
+
+To use `online_brent_rating`, creating the object
+
+```python
+>>> from brent_rating import *
+>>> br = online_brent_rating()
+```
+
+Before you add any new match data to it, you will need to create the name first.
+
+```python
+>>> br.new_name("A")
+1
+>>> br.new_name("B")
+2
+>>> br.new_name("C")
+3
+>>> 
+```
+
+To input matchs' results, you need to switch the object into updating state and then add the results.
+
+```python
+>>> br.start()
+>>> br.add("A","B",1) # A vs B => A wins
+>>> br.add("B","C",1) # B vs C => B wins
+>>> br.add("C","A",-1) # C vs A => C loses
+>>> br.add("B","C",0) # B vs C => draw game
+>>> br.commit()
+```
+
+When `br.commit()` is executed, it will update the ratings
+
+You can get the ratings by `br.current()`
+
+```python
+>>> br.current()
+array([ 0.        ,  1.26869486, -0.21202082, -0.98304483])
+```
+
+or 
+
+```python
+>>> br.get("A")
+1.2686948633315682
+>>> br["A"]
+1.2686948633315682
+```
+
+non-exist name will return 0.
+
+```python
+>>> br["ABC"]
+0.0
+```
+
+iterator is available:
+
+```python
+>>> for (name,rating) in br:
+...   print(name,rating)
+... 
+A 1.2686948633315682
+B -0.2120208244815574
+C -0.9830448286353088
+>>> 
+```
+
+
