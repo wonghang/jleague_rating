@@ -15,7 +15,7 @@ There are $n$ players playing among each other in a zero-sum game for several ti
 
 We want to compute a rating $r_i$ for each player $i$ from the score matrix $S$. The ratings should capture the relative strength of the players.
 
-The rating $r_i$ and $r_j$ should capture the expected score of a player $i$ in a game against player $j$ as $f(r_i - r_j)$ for some function $f: \mathbb{R} \to [0,1]$.
+We assume the rating $r_i$ and $r_j$ will compute the expected score of a player $i$ in a game against player $j$ as $f(r_i - r_j)$ for some function $f: \mathbb{R} \to [0,1]$.
 
 Under some reasonable assumptions, we assume $f$ is a logistic function:
 
