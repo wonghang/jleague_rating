@@ -219,7 +219,7 @@ As the code implements an online algorithm, one can plot the ratings of teams ag
 
 The data is stored in `japan_soccer.csv`. It consists of all Japan League football matches from 2005 Jan 1 to 2015 Dec 31. The data was collected from various sources by me.
 
-The meaning of the field as follows
+The meaning of the field:
 
 | field | meaning |
 | --- | --- |
