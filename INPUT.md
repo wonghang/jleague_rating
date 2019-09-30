@@ -35,7 +35,7 @@ The dummy player has the name "" (empty string) and must have index 0.
 
 # Dependencies
 
-The code requires [numpy](https://numpy.org/), [pandas](https://pandas.pydata.org/) and [matplotlib](https://matplotlib.org/).
+The code depends on [numpy](https://numpy.org/), [pandas](https://pandas.pydata.org/) and [matplotlib](https://matplotlib.org/).
 
 # Example
 
@@ -255,14 +255,14 @@ Any -1 in the data means missing data.
 
 # API
 
-To use `online_brent_rating`, creating the object
+To use `online_brent_rating`, creating an object:
 
 ```python
 >>> from brent_rating import *
 >>> br = online_brent_rating()
 ```
 
-Before you add any new match data to it, you will need to create the name first.
+Before you add any new match data to it, you need to create the names first.
 
 ```python
 >>> br.new_name("A")
@@ -274,7 +274,7 @@ Before you add any new match data to it, you will need to create the name first.
 >>> 
 ```
 
-To input matchs' results, you need to switch the object into updating state and then add the results.
+To feed matchs' results, please do the followings:
 
 ```python
 >>> br.start()
@@ -284,8 +284,6 @@ To input matchs' results, you need to switch the object into updating state and 
 >>> br.add("B","C",0) # B vs C => draw game
 >>> br.commit()
 ```
-
-When `br.commit()` is executed, it will update the ratings
 
 You can get the ratings by `br.current()`
 
@@ -303,14 +301,14 @@ or
 1.2686948633315682
 ```
 
-non-exist name will return 0.
+Any non-exist name returns 0.
 
 ```python
 >>> br["ABC"]
 0.0
 ```
 
-iterator is available:
+iterator interface is available:
 
 ```python
 >>> for (name,rating) in br:
@@ -322,4 +320,14 @@ C -0.9830448286353088
 >>> 
 ```
 
+A simple `predict` function to compute the expected score is available as well:
 
+```python
+>>> br.predict("A","B")
+0.8146806567861219
+>>> br.predict("B","C")
+0.6837423647588244
+>>> br.predict("C","B")
+0.3162576352411756
+>>> 
+```
