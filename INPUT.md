@@ -11,11 +11,11 @@ Brent, Richard P. "Note on Computing Ratings from Eigenvectors." * *arXiv prepri
 
 The problem is as follow:
 
-There are $n$ players playing among each other in a zero-sum game for several times. Assume a WIN score 1 mark, a DRAW score 0.5 marks and a LOSE scores 0 marks. We obtained a score matrix $s_{ij}$.
+There are $n$ players playing among each other in a zero-sum game for several times. Assume a WIN score 1 mark, a DRAW score 0.5 marks and a LOSE scores 0 marks. We obtained a score matrix $S = (s_{ij})$.
 
-We want to compute a rating $r_i$ for each player $i$ from the score matrix $S = (s_{ij})$. The ratings should capture the relative strength of the players.
+We want to compute a rating $r_i$ for each player $i$ from the score matrix $S$. The ratings should capture the relative strength of the players.
 
-To start with, we assume the rating $r_i$ and $r_j$ would capture the expected score of a player $i$ in a game against player $j$ as $f(r_i - r_j)$ for some function $f: \mathbb{R} \to [0,1]$.
+The rating $r_i$ and $r_j$ should capture the expected score of a player $i$ in a game against player $j$ as $f(r_i - r_j)$ for some function $f: \mathbb{R} \to [0,1]$.
 
 Under some reasonable assumptions, we assume $f$ is a logistic function:
 
@@ -23,9 +23,9 @@ $$
 f(z) = \frac{1}{1+e^{-cz}}
 $$
 
-for some number $c$.
+for some number $c$. In this implementation, $c=1$.
 
-Under this assumption, the solution to the problem reduces into an eigenvalue problem. The code computes the solution by power method.
+Under this assumption, the solution to the problem can be reduced into a linear eigenvalue problem.
 
 The code implements an efficient sparse and online version of the algorithm (i.e., new data can be fed into the algorithm to update previously computed ratings).
 
