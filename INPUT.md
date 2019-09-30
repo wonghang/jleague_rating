@@ -285,6 +285,8 @@ To feed matchs' results, please do the followings:
 >>> br.commit()
 ```
 
+You may specify a decay term by `br.commit(decay=0.99)` so that old matches have fewer weights.
+
 You can get the ratings by `br.current()`
 
 ```python
