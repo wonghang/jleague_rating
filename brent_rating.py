@@ -27,7 +27,7 @@ class online_brent_rating:
             return "<online_brent_rating at 0x%x, #game=%d, #players=%d, #updating=%d>" % (id(self),self.tgc,self.n,self.ntgc)
 
     def current(self):
-        return np.log(self.orating) - np.log(self.orating[0])
+        return np.log(self.orating)
 
     def names(self):
         return self.name_map_inv
@@ -43,7 +43,7 @@ class online_brent_rating:
         except KeyError:
             return 0.
         else:
-            return np.log(self.orating[idx]) - np.log(self.orating[0])
+            return np.log(self.orating[idx])
     __getitem__=get
 
     def new_name(self,name):
@@ -129,6 +129,8 @@ class online_brent_rating:
                 raise ValueError("Failed to converge")
             (x0,x1) = (x1,x0)
 
+        # normalize rating so that dummy player always gets 0
+        x1 /= x1[0]
         self.orating = x1
         self.gc = self.ngc
         self.tgc += self.ntgc
