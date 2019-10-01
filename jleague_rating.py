@@ -80,6 +80,13 @@ def run():
 def main():
     if len(sys.argv) > 1:
         teams = sys.argv[1:]
+        try:
+            p = teams.index("--baseline")
+        except ValueError:
+            baseline = ""
+        else:
+            baseline = teams[p+1]
+            teams = teams[0:p] + teams[p+2:]
     else:
         teams = []
 
@@ -90,7 +97,7 @@ def main():
         for (today,br) in run():
             if ignore_first <= 0:
                 x.append(convert_date(today))
-                y.append([br[_] for _ in teams])
+                y.append([br[_] - br[baseline] for _ in teams])
             else:
                 ignore_first -= 1
             

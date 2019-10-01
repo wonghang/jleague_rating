@@ -212,14 +212,17 @@ As the code implements an online algorithm, one can plot the ratings of teams ag
 (The first 100 data points are not plotted)
 
 ```shell
-> python3 jleague_rating.py 鹿島鹿角 浦和紅鑽 清水心跳
+> python3 jleague_rating.py 鹿島鹿角 浦和紅鑽 京都不死鳥 --baseline 清水心跳
 ```
 
 ![Figure_1.png](Figure_1.png?raw=true "Figure 1")
 
+Because only relative strength (i.e., $r_i - r_j$) is meaningful for the ratings, you can use `--baseline` flag to specify a team as the baseline of the graph.
+If `--baseline` is not specified, the dummy player will be used.
+
 # Data
 
-The data is stored in `japan_soccer.csv`. It consists of all Japan League football matches from 2005 Jan 1 to 2015 Dec 31. The data was collected from various sources by me.
+The data is stored in `japan_soccer.csv`, which consists of all Japan League football matches from 2005 Jan 1 to 2015 Dec 31. 
 
 The meaning of the field:
 
